@@ -24,7 +24,9 @@ class MybookingApiCredentials:
   # Calculate post signature
   #    
   def calculate_post_signature(self, the_url, the_body):
-    data = the_url + the_body
+    data = the_url
+    if the_body != "":
+      data += the_body
     hash = hmac.new(self.secret_key.encode('utf-8'), data.encode('utf-8'), hashlib.sha1)
     result = hash.hexdigest()
     return result
