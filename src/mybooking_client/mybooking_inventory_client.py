@@ -17,21 +17,21 @@ class MybookingInventoryClient:
     # Prepare the pagination args
     page = offset * limit
     page_size = limit
-    #args = {"search_filter":"all"}
 
   	# Build the URL
-    url = '/api/booking-items'
-    body = '' #json.dumps(args)
+    url = '/api/booking-items?page={page}&page_size={page_size}'.format(page=page,
+                                                                        page_size=page_size)
+
 
     # Build the URL with the prefix
     the_url = self.credentials.url
     the_url += url
     # 
-    signature = self.credentials.calculate_post_signature(url, body)
+    signature = self.credentials.calculate_get_signature(url)
     authorization = self.credentials.authorization_header(signature)
-    print(authorization)
+    #print(authorization)
   	# Call the API
-    response = requests.post(the_url, headers = { 'Authorization': authorization })
+    response = requests.get(the_url, headers = { 'Authorization': authorization })
     # check response.status_code
     if response.status_code == 200:
       return response.json()

@@ -26,7 +26,7 @@ class MybookingReservationClient:
     # 
     signature = self.credentials.calculate_get_signature(url)
     authorization = self.credentials.authorization_header(signature)
-    print(authorization)
+    #print(authorization)
   	# Call the API
     response = requests.get(the_url, headers = { 'Authorization': authorization })
     # check response.status_code
