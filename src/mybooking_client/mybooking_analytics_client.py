@@ -1,7 +1,7 @@
 import requests;
 import json;
 
-class MybookingInventoryClient:
+class MybookingAnalyticsClient:
   
   #
   # Constructor
@@ -11,15 +11,18 @@ class MybookingInventoryClient:
 
 
   # 
-  # Get inventory
+  # Get expenses
   #
-  def inventory(self, page_size=100, page=0):
+  def expenses(self, year, page_size=100, page=0):
 
   	# Build the URL
-    url = '/api/booking-items?page={page}&page_size={page_size}'.format(page=page,
-                                                                        page_size=page_size)
-
-
+    url = '/api/booking/booking-item/expenses'\
+          '?year={year}&page={page}&page_size={page_size}'
+    
+    url = url.format(year=year,
+                     page=page,
+                     page_size=page_size)
+    
     # Build the URL with the prefix
     the_url = self.credentials.url
     the_url += url
@@ -31,7 +34,4 @@ class MybookingInventoryClient:
   	# Call the API
     response = requests.get(the_url, headers = { 'Authorization': authorization })
     # check response.status_code
-    if response.status_code == 200:
-      return response.json()
-    else:  
-      return response
+    return response.json()

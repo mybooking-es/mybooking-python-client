@@ -18,13 +18,15 @@ class MybookingReservationClient:
   	# Build the URL
     url = '/api/booking/reservation-report?page={page}&page_size={page_size}'.format(page=page,
                                                                                      page_size=page_size)
+    
     # Build the URL with the prefix
     the_url = self.credentials.url
     the_url += url
-    # 
+    
+    # Build the signature 
     signature = self.credentials.calculate_get_signature(url)
     authorization = self.credentials.authorization_header(signature)
-    #print(authorization)
+
   	# Call the API
     response = requests.get(the_url, headers = { 'Authorization': authorization })
     # check response.status_code
