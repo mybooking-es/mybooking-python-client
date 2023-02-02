@@ -13,10 +13,8 @@ class MybookingReservationClient:
   # 
   # Get reservations
   #
-  def reservations(self, limit=100, offset=0):
-    # Prepare the pagination args
-    page = offset * limit
-    page_size = limit
+  def reservations(self, page_size=100, page=0):
+
   	# Build the URL
     url = '/api/booking/reservation-report?page={page}&page_size={page_size}'.format(page=page,
                                                                                      page_size=page_size)

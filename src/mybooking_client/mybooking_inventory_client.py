@@ -13,10 +13,7 @@ class MybookingInventoryClient:
   # 
   # Get inventory
   #
-  def inventory(self, limit=100, offset=0):
-    # Prepare the pagination args
-    page = offset * limit
-    page_size = limit
+  def inventory(self, page_size=100, page=0):
 
   	# Build the URL
     url = '/api/booking-items?page={page}&page_size={page_size}'.format(page=page,
