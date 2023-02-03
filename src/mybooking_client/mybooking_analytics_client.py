@@ -34,4 +34,7 @@ class MybookingAnalyticsClient:
   	# Call the API
     response = requests.get(the_url, headers = { 'Authorization': authorization })
     # check response.status_code
-    return response.json()
+    if response.status_code == 200:
+      return response.json()
+    else:  
+      return response       
